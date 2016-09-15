@@ -101,8 +101,10 @@ class Regions extends Component {
   }
 
   _init() {
-    const { wavesurfer, regions } = this.props;
+    const { wavesurfer, regions, enableDragSelection } = this.props;
     let newRegionId;
+
+    if (enableDragSelection) wavesurfer.enableDragSelection({});
 
     REGIONS_EVENTS.forEach(e => {
       const propCallback = this.props[`on${capitaliseFirstLetter(e)}`];
@@ -152,12 +154,14 @@ class Regions extends Component {
 }
 
 Regions.propTypes = {
+  enableDragSelection: PropTypes.bool,
   isReady: PropTypes.bool,
   regions: PropTypes.object,
   wavesurfer: PropTypes.object
 };
 
 Regions.defaultProps = {
+  enableDragSelection: false,
   regions: []
 };
 
